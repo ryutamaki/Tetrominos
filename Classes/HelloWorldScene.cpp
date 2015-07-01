@@ -32,7 +32,7 @@ bool HelloWorld::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     Lobby* lobby = Lobby::create();
-    lobby->addChild(lobby);
+    this->addChild(lobby);
 
     return true;
 }
