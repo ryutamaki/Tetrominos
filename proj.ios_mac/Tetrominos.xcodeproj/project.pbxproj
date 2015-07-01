@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		03BC8A1A1B447DEC00C97735 /* Lobby.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03BC8A181B447DEC00C97735 /* Lobby.cpp */; };
 		03BC8A1B1B447DEC00C97735 /* Lobby.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03BC8A181B447DEC00C97735 /* Lobby.cpp */; };
+		03BC8A201B448FD700C97735 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03BC8A1E1B448FD700C97735 /* GameScene.cpp */; };
+		03BC8A211B448FD700C97735 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03BC8A1E1B448FD700C97735 /* GameScene.cpp */; };
 		1AC6FB21180E996B004C840B /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAF9180E9839004C840B /* libcocos2d Mac.a */; };
 		1AC6FB30180E99EB004C840B /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FB07180E9839004C840B /* libcocos2d iOS.a */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -106,6 +108,8 @@
 		03BC8A181B447DEC00C97735 /* Lobby.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Lobby.cpp; sourceTree = "<group>"; };
 		03BC8A191B447DEC00C97735 /* Lobby.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lobby.h; sourceTree = "<group>"; };
 		03BC8A1D1B44834800C97735 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		03BC8A1E1B448FD700C97735 /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameScene.cpp; sourceTree = "<group>"; };
+		03BC8A1F1B448FD700C97735 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
 		1ACB3243164770DE00914215 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../cocos2dx/platform/third_party/ios/libraries/libcurl.a; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -300,6 +304,8 @@
 				46880B8719C43A87006E1F66 /* HelloWorldScene.h */,
 				03BC8A181B447DEC00C97735 /* Lobby.cpp */,
 				03BC8A191B447DEC00C97735 /* Lobby.h */,
+				03BC8A1E1B448FD700C97735 /* GameScene.cpp */,
+				03BC8A1F1B448FD700C97735 /* GameScene.h */,
 				03BC8A1D1B44834800C97735 /* Constants.h */,
 			);
 			name = Classes;
@@ -503,6 +509,7 @@
 				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				03BC8A1A1B447DEC00C97735 /* Lobby.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
+				03BC8A201B448FD700C97735 /* GameScene.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 			);
@@ -512,6 +519,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03BC8A211B448FD700C97735 /* GameScene.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				03BC8A1B1B447DEC00C97735 /* Lobby.cpp in Sources */,
