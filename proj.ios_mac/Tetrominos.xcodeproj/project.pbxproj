@@ -13,6 +13,8 @@
 		03BC8A211B448FD700C97735 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03BC8A1E1B448FD700C97735 /* GameScene.cpp */; };
 		03BC8A2E1B449CE800C97735 /* SceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03BC8A2C1B449CE800C97735 /* SceneManager.cpp */; };
 		03BC8A2F1B449CE800C97735 /* SceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03BC8A2C1B449CE800C97735 /* SceneManager.cpp */; };
+		03BC8A421B44A4A500C97735 /* Grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03BC8A401B44A4A500C97735 /* Grid.cpp */; };
+		03BC8A431B44A4A500C97735 /* Grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03BC8A401B44A4A500C97735 /* Grid.cpp */; };
 		1AC6FB21180E996B004C840B /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAF9180E9839004C840B /* libcocos2d Mac.a */; };
 		1AC6FB30180E99EB004C840B /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FB07180E9839004C840B /* libcocos2d iOS.a */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -114,6 +116,8 @@
 		03BC8A1F1B448FD700C97735 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		03BC8A2C1B449CE800C97735 /* SceneManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneManager.cpp; sourceTree = "<group>"; };
 		03BC8A2D1B449CE800C97735 /* SceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneManager.h; sourceTree = "<group>"; };
+		03BC8A401B44A4A500C97735 /* Grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Grid.cpp; sourceTree = "<group>"; };
+		03BC8A411B44A4A500C97735 /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grid.h; sourceTree = "<group>"; };
 		1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
 		1ACB3243164770DE00914215 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../cocos2dx/platform/third_party/ios/libraries/libcurl.a; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -312,6 +316,8 @@
 				03BC8A191B447DEC00C97735 /* Lobby.h */,
 				03BC8A1E1B448FD700C97735 /* GameScene.cpp */,
 				03BC8A1F1B448FD700C97735 /* GameScene.h */,
+				03BC8A401B44A4A500C97735 /* Grid.cpp */,
+				03BC8A411B44A4A500C97735 /* Grid.h */,
 				03BC8A1D1B44834800C97735 /* Constants.h */,
 			);
 			name = Classes;
@@ -511,6 +517,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03BC8A421B44A4A500C97735 /* Grid.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				03BC8A2E1B449CE800C97735 /* SceneManager.cpp in Sources */,
@@ -531,6 +538,7 @@
 				03BC8A2F1B449CE800C97735 /* SceneManager.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				03BC8A1B1B447DEC00C97735 /* Lobby.cpp in Sources */,
+				03BC8A431B44A4A500C97735 /* Grid.cpp in Sources */,
 				46880B8B19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

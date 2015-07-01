@@ -16,6 +16,7 @@ public:
     static SceneManager* getInstance();
 
     void enterGameScene(bool networked);
+    void exitGameScene();
 
 protected:
     SceneManager();
