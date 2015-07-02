@@ -24,6 +24,8 @@ private:
     bool init() override;
     void onEnter() override;
 
+    void setupTouchHandling();
+
     void backButtonPressed(Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
 
 };

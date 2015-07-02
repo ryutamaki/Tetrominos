@@ -13,6 +13,8 @@ USING_NS_CC;
 
 #define GRID_SIZE 4
 
+#pragma mark - Initializing methods
+
 Tetromino* Tetromino::createWithType(TetrominoType type)
 {
     Tetromino* tetromino = new (std::nothrow) Tetromino();
@@ -43,7 +45,9 @@ bool Tetromino::initWithType(TetrominoType type)
 
     this->rotations = tetrominoStete.rotations;
     this->color = tetrominoStete.color;
-    this->blocks = std::vector<Sprite*>(4);
+    this->blocks = std::vector<Sprite*>();
+    this->blocks.reserve(4);
+    this->rotationIndex = 0;
 
     Sprite* dummyBlock = Sprite::create("block.png");
     Size dummySize = dummyBlock->getContentSize();
@@ -51,7 +55,7 @@ bool Tetromino::initWithType(TetrominoType type)
     float gridSizeFloat = float(GRID_SIZE);
     this->setContentSize(Size(dummySize.width * gridSizeFloat, dummySize.height * gridSizeFloat));
 
-    auto coordinates = rotations[0];
+    auto coordinates = rotations[this->rotationIndex];
     for (Coordinate coordinate : coordinates)
     {
         Sprite* block = Sprite::create("block.png");
@@ -75,4 +79,38 @@ void Tetromino::onEnter()
 void Tetromino::onExit()
 {
     Node::onExit();
+}
+
+#pragma mark - Public methods
+
+void Tetromino::rotate(bool right)
+{
+    if (right)
+    {
+        this->rotationIndex++;
+    }
+    else
+    {
+        this->rotationIndex--;
+    }
+
+    if (this->rotationIndex < 0)
+    {
+        this->rotationIndex = (int)rotations.size() - 1;
+    }
+    else if (this->rotations.size() <= this->rotationIndex)
+    {
+        this->rotationIndex = 0;
+    }
+
+    auto coordinates = rotations[this->rotationIndex];
+
+    for (int index = 0; index < GRID_SIZE; index++)
+    {
+        Sprite* block = blocks[index];
+        Coordinate coordinate = coordinates[index];
+
+        Size blockSize = block->getContentSize();
+        block->setPosition(Vec2(coordinate.x * blockSize.width, coordinate.y * blockSize.height));
+    }
 }

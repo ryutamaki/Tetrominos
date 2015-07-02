@@ -13,8 +13,10 @@
 
 using namespace cocos2d;
 
-bool GameScene::init() {
-    if (!Node::init()) {
+bool GameScene::init()
+{
+    if (!Node::init())
+    {
         return false;
     }
 
@@ -26,7 +28,8 @@ bool GameScene::init() {
 
 #pragma mark - View lifecycle
 
-void GameScene::onEnter() {
+void GameScene::onEnter()
+{
     Node::onEnter();
 
     Size visibleSize = Director::getInstance()->getVisibleSize();
@@ -44,12 +47,31 @@ void GameScene::onEnter() {
     backButton->loadTextures("backButton.png", "backButtonPressed.png");
     backButton->addTouchEventListener(CC_CALLBACK_2(GameScene::backButtonPressed, this));
     this->addChild(backButton);
+
+    this->setupTouchHandling();
+}
+
+void GameScene::setupTouchHandling()
+{
+    EventListenerTouchOneByOne* touchListener = EventListenerTouchOneByOne::create();
+    touchListener->onTouchBegan = [&](Touch* touch, Event* event)
+    {
+        return true;
+    };
+    touchListener->onTouchEnded = [&](Touch* touch, Event* event)
+    {
+        this->grid->rotateActiveTetromino();
+    };
+
+    this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(touchListener, this);
 }
 
 #pragma mark - Callbacks
 
-void GameScene::backButtonPressed(cocos2d::Ref *pSender, ui::Widget::TouchEventType eEventType) {
-    if (eEventType == ui::Widget::TouchEventType::ENDED) {
+void GameScene::backButtonPressed(cocos2d::Ref *pSender, ui::Widget::TouchEventType eEventType)
+{
+    if (eEventType == ui::Widget::TouchEventType::ENDED)
+    {
         SceneManager::getInstance()->exitGameScene();
     }
 }
