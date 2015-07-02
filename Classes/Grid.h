@@ -9,6 +9,8 @@
 #ifndef __Tetrominos__Grid__
 #define __Tetrominos__Grid__
 
+#include "Coordinate.h"
+
 class Tetromino;
 
 class Grid : public cocos2d::Sprite {
@@ -17,12 +19,19 @@ public:
 
     void spawnTetromino(Tetromino* tetromino);
     void rotateActiveTetromino();
+    void step();
+
+    void setActiveTetrominoCoordinate(Coordinate coordinate);
+    Coordinate getActiveTetrominoCoordinate();
 
 private:
     Tetromino* activeTetromino;
+    Coordinate activeTetrominoCoordinate;
 
     bool init() override;
     void onEnter() override;
+
+    cocos2d::Vec2 convertCoordinatetoPosition(Coordinate coordinate);
 };
 
 #endif /* defined(__Tetrominos__Grid__) */

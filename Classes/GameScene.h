@@ -25,6 +25,8 @@ private:
     Grid* grid;
     std::unique_ptr<TetrominoBag> tetrominoBag;
 
+    bool active;
+
     bool init() override;
     void onEnter() override;
 
@@ -33,6 +35,10 @@ private:
     Tetromino* createRandomTetromino();
 
     void backButtonPressed(Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
+
+    void setGameActive(bool active);
+
+    void step(float dt);
 
 };
 

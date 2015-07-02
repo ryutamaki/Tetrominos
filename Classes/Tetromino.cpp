@@ -114,3 +114,28 @@ void Tetromino::rotate(bool right)
         block->setPosition(Vec2(coordinate.x * blockSize.width, coordinate.y * blockSize.height));
     }
 }
+
+int Tetromino::getHighestYCoordinate()
+{
+    std::vector<Coordinate> coordinates = this->rotations[this->rotationIndex];
+
+    int maxY = 0;
+    for (Coordinate coordinate : coordinates)
+    {
+        maxY = MAX(coordinate.y, maxY);
+    }
+    return maxY;
+}
+
+int Tetromino::getWidthInBlocks()
+{
+    std::vector<Coordinate> coordinates = this->rotations[this->rotationIndex];
+    int minX = GRID_SIZE - 1;
+    int maxX = 0;
+    for (Coordinate coordinate : coordinates)
+    {
+        minX = MIN(coordinate.x, minX);
+        maxX = MAX(coordinate.x, maxX);
+    }
+    return maxX - minX + 1;
+}

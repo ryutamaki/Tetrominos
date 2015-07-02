@@ -21,6 +21,9 @@ public:
 
     void rotate(bool right);
 
+    int getHighestYCoordinate();
+    int getWidthInBlocks();
+
 private:
     TetrominoType type;
     int rotationIndex;
@@ -31,7 +34,6 @@ private:
     bool initWithType(TetrominoType type);
     void onEnter() override;
     void onExit() override;
-
 };
 
 #endif /* defined(__Tetrominos__Tetromino__) */
