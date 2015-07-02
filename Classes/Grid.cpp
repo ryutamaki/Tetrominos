@@ -28,14 +28,17 @@ bool Grid::init() {
 void Grid::onEnter()
 {
     Sprite::onEnter();
-
-    this->activeTetromino = Tetromino::createWithType(TetrominoType::T);
-    this->addChild(this->activeTetromino);
-
-    this->schedule(CC_SCHEDULE_SELECTOR(Grid::update), 1.0f);
 }
 
 #pragma mark - Public methods
+
+void Grid::spawnTetromino(Tetromino *tetromino)
+{
+    this->activeTetromino = tetromino;
+    this->addChild(this->activeTetromino);
+
+    // TODO: Plase a tetromino in correct position in grid
+}
 
 void Grid::rotateActiveTetromino()
 {
@@ -46,3 +49,5 @@ void Grid::rotateActiveTetromino()
 
     // TODO: check if collision, undo rotation
 }
+
+#pragma mark - Private methods

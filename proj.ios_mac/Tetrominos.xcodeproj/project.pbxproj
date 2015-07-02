@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0382A08B1B45DCE40010A353 /* TetrominoBag.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0382A0891B45DCE40010A353 /* TetrominoBag.cpp */; };
+		0382A08C1B45DCE40010A353 /* TetrominoBag.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0382A0891B45DCE40010A353 /* TetrominoBag.cpp */; };
 		03BC8A1A1B447DEC00C97735 /* Lobby.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03BC8A181B447DEC00C97735 /* Lobby.cpp */; };
 		03BC8A1B1B447DEC00C97735 /* Lobby.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03BC8A181B447DEC00C97735 /* Lobby.cpp */; };
 		03BC8A201B448FD700C97735 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03BC8A1E1B448FD700C97735 /* GameScene.cpp */; };
@@ -115,6 +117,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0382A0891B45DCE40010A353 /* TetrominoBag.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TetrominoBag.cpp; sourceTree = "<group>"; };
+		0382A08A1B45DCE40010A353 /* TetrominoBag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TetrominoBag.h; sourceTree = "<group>"; };
 		03BC8A181B447DEC00C97735 /* Lobby.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Lobby.cpp; sourceTree = "<group>"; };
 		03BC8A191B447DEC00C97735 /* Lobby.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lobby.h; sourceTree = "<group>"; };
 		03BC8A1D1B44834800C97735 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -332,6 +336,8 @@
 				03BC8A411B44A4A500C97735 /* Grid.h */,
 				03BC8A441B44A85700C97735 /* Tetromino.cpp */,
 				03BC8A451B44A85700C97735 /* Tetromino.h */,
+				0382A0891B45DCE40010A353 /* TetrominoBag.cpp */,
+				0382A08A1B45DCE40010A353 /* TetrominoBag.h */,
 				03BC8A481B44AFDB00C97735 /* Coordinate.cpp */,
 				03BC8A491B44AFDB00C97735 /* Coordinate.h */,
 				03BC8A1D1B44834800C97735 /* Constants.h */,
@@ -544,6 +550,7 @@
 				03BC8A201B448FD700C97735 /* GameScene.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				03BC8A4A1B44AFDB00C97735 /* Coordinate.cpp in Sources */,
+				0382A08B1B45DCE40010A353 /* TetrominoBag.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				03BC8A461B44A85700C97735 /* Tetromino.cpp in Sources */,
 				03BC8A521B44B43900C97735 /* JSONPacker.cpp in Sources */,
@@ -562,6 +569,7 @@
 				03BC8A1B1B447DEC00C97735 /* Lobby.cpp in Sources */,
 				03BC8A431B44A4A500C97735 /* Grid.cpp in Sources */,
 				03BC8A531B44B43900C97735 /* JSONPacker.cpp in Sources */,
+				0382A08C1B45DCE40010A353 /* TetrominoBag.cpp in Sources */,
 				46880B8B19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				03BC8A471B44A85700C97735 /* Tetromino.cpp in Sources */,
 			);

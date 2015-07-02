@@ -15,6 +15,7 @@ class Grid : public cocos2d::Sprite {
 public:
     CREATE_FUNC(Grid);
 
+    void spawnTetromino(Tetromino* tetromino);
     void rotateActiveTetromino();
 
 private:
