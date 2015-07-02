@@ -7,6 +7,7 @@
 //
 
 #include "Grid.h"
+#include "Tetromino.h"
 
 USING_NS_CC;
 
@@ -14,5 +15,6 @@ bool Grid::init() {
     if (!Sprite::initWithFile("grid.png")) {
         return false;
     }
+
     return true;
 }

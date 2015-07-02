@@ -19,6 +19,8 @@
 		03BC8A471B44A85700C97735 /* Tetromino.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03BC8A441B44A85700C97735 /* Tetromino.cpp */; };
 		03BC8A4A1B44AFDB00C97735 /* Coordinate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03BC8A481B44AFDB00C97735 /* Coordinate.cpp */; };
 		03BC8A4B1B44AFDB00C97735 /* Coordinate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03BC8A481B44AFDB00C97735 /* Coordinate.cpp */; };
+		03BC8A521B44B43900C97735 /* JSONPacker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03BC8A501B44B43900C97735 /* JSONPacker.cpp */; };
+		03BC8A531B44B43900C97735 /* JSONPacker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03BC8A501B44B43900C97735 /* JSONPacker.cpp */; };
 		1AC6FB21180E996B004C840B /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAF9180E9839004C840B /* libcocos2d Mac.a */; };
 		1AC6FB30180E99EB004C840B /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FB07180E9839004C840B /* libcocos2d iOS.a */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -126,6 +128,8 @@
 		03BC8A451B44A85700C97735 /* Tetromino.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tetromino.h; sourceTree = "<group>"; };
 		03BC8A481B44AFDB00C97735 /* Coordinate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Coordinate.cpp; sourceTree = "<group>"; };
 		03BC8A491B44AFDB00C97735 /* Coordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coordinate.h; sourceTree = "<group>"; };
+		03BC8A501B44B43900C97735 /* JSONPacker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSONPacker.cpp; sourceTree = "<group>"; };
+		03BC8A511B44B43900C97735 /* JSONPacker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONPacker.h; sourceTree = "<group>"; };
 		1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
 		1ACB3243164770DE00914215 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../cocos2dx/platform/third_party/ios/libraries/libcurl.a; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -331,6 +335,8 @@
 				03BC8A481B44AFDB00C97735 /* Coordinate.cpp */,
 				03BC8A491B44AFDB00C97735 /* Coordinate.h */,
 				03BC8A1D1B44834800C97735 /* Constants.h */,
+				03BC8A501B44B43900C97735 /* JSONPacker.cpp */,
+				03BC8A511B44B43900C97735 /* JSONPacker.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -540,6 +546,7 @@
 				03BC8A4A1B44AFDB00C97735 /* Coordinate.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				03BC8A461B44A85700C97735 /* Tetromino.cpp in Sources */,
+				03BC8A521B44B43900C97735 /* JSONPacker.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -554,6 +561,7 @@
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				03BC8A1B1B447DEC00C97735 /* Lobby.cpp in Sources */,
 				03BC8A431B44A4A500C97735 /* Grid.cpp in Sources */,
+				03BC8A531B44B43900C97735 /* JSONPacker.cpp in Sources */,
 				46880B8B19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				03BC8A471B44A85700C97735 /* Tetromino.cpp in Sources */,
 			);

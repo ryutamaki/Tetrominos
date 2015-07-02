@@ -7,6 +7,7 @@
 //
 
 #include "Tetromino.h"
+#include "JSONPacker.h"
 
 USING_NS_CC;
 
@@ -31,6 +32,12 @@ bool Tetromino::initWithType(TetrominoType type)
     }
     this->type = type;
     this->rotations = std::vector<std::vector<Coordinate>>();
+
+    // How to load json file using FileUtils
+    std::string fullPath = FileUtils::getInstance()->fullPathForFilename("tetrominos.json");
+    std::string jsonString = FileUtils::getInstance()->getStringFromFile(fullPath);
+
+    JSONPacker::TetrominoState tetrominoStete = JSONPacker::unpackTetrominoJSON(jsonString, type);
 
     return true;
 }
