@@ -11,6 +11,8 @@
 
 USING_NS_CC;
 
+#define GRID_SIZE 4
+
 Tetromino* Tetromino::createWithType(TetrominoType type)
 {
     Tetromino* tetromino = new (std::nothrow) Tetromino();
@@ -38,6 +40,27 @@ bool Tetromino::initWithType(TetrominoType type)
     std::string jsonString = FileUtils::getInstance()->getStringFromFile(fullPath);
 
     JSONPacker::TetrominoState tetrominoStete = JSONPacker::unpackTetrominoJSON(jsonString, type);
+
+    this->rotations = tetrominoStete.rotations;
+    this->color = tetrominoStete.color;
+    this->blocks = std::vector<Sprite*>(4);
+
+    Sprite* dummyBlock = Sprite::create("block.png");
+    Size dummySize = dummyBlock->getContentSize();
+
+    float gridSizeFloat = float(GRID_SIZE);
+    this->setContentSize(Size(dummySize.width * gridSizeFloat, dummySize.height * gridSizeFloat));
+
+    auto coordinates = rotations[0];
+    for (Coordinate coordinate : coordinates)
+    {
+        Sprite* block = Sprite::create("block.png");
+        block->setColor(tetrominoStete.color);
+        block->setAnchorPoint(Vec2(0.0f, 0.0f));
+        block->setPosition(Vec2(coordinate.x * dummySize.width, coordinate.y * dummySize.height));
+        this->addChild(block);
+        this->blocks.push_back(block);
+    }
 
     return true;
 }
