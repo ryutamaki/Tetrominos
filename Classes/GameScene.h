@@ -12,10 +12,13 @@
 #include "cocos2d.h"
 #include "CocosGUI.h"
 
+#include "Constants.h"
+
 #include "TetrominoBag.h"
 
 class Grid;
 class Tetromino;
+class Coordinate;
 
 class GameScene : public cocos2d::Node {
 public:
@@ -39,6 +42,8 @@ private:
     void setGameActive(bool active);
 
     void step(float dt);
+
+    Coordinate convertPositionToCoordinate(cocos2d::Vec2 position);
 
 };
 

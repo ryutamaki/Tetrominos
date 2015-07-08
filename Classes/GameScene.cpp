@@ -64,19 +64,73 @@ void GameScene::onEnter()
 void GameScene::setupTouchHandling()
 {
     EventListenerTouchOneByOne* touchListener = EventListenerTouchOneByOne::create();
+
+    static Vec2 firstTouchPos;
+    static Vec2 lastTouchPos;
+    static bool allowRotate;
+
     touchListener->onTouchBegan = [&](Touch* touch, Event* event)
     {
+        firstTouchPos = this->convertTouchToNodeSpace(touch);
+        lastTouchPos = firstTouchPos;
+        allowRotate = true;
         return true;
+    };
+    touchListener->onTouchMoved = [&](Touch* touch, Event* event)
+    {
+        Vec2 touchPos = this->convertTouchToNodeSpace(touch);
+
+        Vec2 difference = touchPos - lastTouchPos;
+
+        Tetromino* activeTetromino = this->grid->getActiveTetromino();
+        if (!activeTetromino)
+        {
+            return;
+        }
+
+        Coordinate touchCoordinate = this->convertPositionToCoordinate(touchPos);
+        Coordinate differenceCoordinate = this->convertPositionToCoordinate(difference);
+        Coordinate activeTetrominoCoordinate = this->grid->getActiveTetrominoCoordinate();
+        if (abs(differenceCoordinate.x) >= 1)
+        {
+            bool movingRight = differenceCoordinate.x > 0;
+            Coordinate newTetrominoCoordinate;
+            newTetrominoCoordinate = Coordinate(activeTetrominoCoordinate.x + (movingRight ? 1 : -1), activeTetrominoCoordinate.y);
+            this->grid->setActiveTetrominoCoordinate(newTetrominoCoordinate);
+            allowRotate = false;
+            lastTouchPos = touchPos;
+        }
     };
     touchListener->onTouchEnded = [&](Touch* touch, Event* event)
     {
-        this->grid->rotateActiveTetromino();
+        Vec2 touchEndPos = this->convertTouchToNodeSpace(touch);
+
+        float distance = touchEndPos.distance(firstTouchPos);
+        Size blocksize = this->grid->getBlockSize();
+
+        if (distance < blocksize.width && allowRotate)
+        {
+            this->grid->rotateActiveTetromino();
+        }
     };
 
     this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(touchListener, this);
 }
 
 #pragma mark - Public methods
+
+Coordinate GameScene::convertPositionToCoordinate(Vec2 position)
+{
+    Size contentSize = this->getContentSize();
+    Vec2 positionBasedOnGrid = this->convertToNodeSpace(position);
+
+    Size blockSize = this->grid->getBlockSize();
+
+    int coordinateX = floor(positionBasedOnGrid.x / blockSize.width);
+    int coordinateY = floor(positionBasedOnGrid.y / blockSize.height);
+
+    return Coordinate(coordinateX, coordinateY);
+}
 
 #pragma mark - Private methods
 

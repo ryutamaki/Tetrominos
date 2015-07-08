@@ -84,6 +84,20 @@ Coordinate Grid::getActiveTetrominoCoordinate()
     return this->activeTetrominoCoordinate;
 }
 
+Size Grid::getBlockSize()
+{
+    Size contentSize = this->getContentSize();
+
+    float blockWidth = contentSize.width / float(GRID_WIDTH);
+    float blockHeight = contentSize.height / float(GRID_HEIGHT);
+    return Size(blockWidth, blockHeight);
+}
+
+Tetromino* Grid::getActiveTetromino()
+{
+    return this->activeTetromino;
+}
+
 #pragma mark - Private methods
 
 Vec2 Grid::convertCoordinatetoPosition(Coordinate coordinate)
