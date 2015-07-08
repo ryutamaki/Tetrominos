@@ -122,12 +122,10 @@ void GameScene::setupTouchHandling()
 Coordinate GameScene::convertPositionToCoordinate(Vec2 position)
 {
     Size contentSize = this->getContentSize();
-    Vec2 positionBasedOnGrid = this->convertToNodeSpace(position);
-
     Size blockSize = this->grid->getBlockSize();
 
-    int coordinateX = floor(positionBasedOnGrid.x / blockSize.width);
-    int coordinateY = floor(positionBasedOnGrid.y / blockSize.height);
+    int coordinateX = position.x / blockSize.width;
+    int coordinateY = position.y / blockSize.height;
 
     return Coordinate(coordinateX, coordinateY);
 }
