@@ -22,7 +22,9 @@ public:
     void rotate(bool right);
 
     int getHighestYCoordinate();
+    int getMinimunXCoordinate();
     int getWidthInBlocks();
+    std::vector<int> getSkirt();
 
 private:
     TetrominoType type;

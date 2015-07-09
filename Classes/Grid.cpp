@@ -52,9 +52,16 @@ void Grid::spawnTetromino(Tetromino *tetromino)
 
 void Grid::rotateActiveTetromino()
 {
-    if (this->activeTetromino)
+    if (!this->activeTetromino)
     {
-        this->activeTetromino->rotate(true);
+        return;
+    }
+
+    this->activeTetromino->rotate(true);
+
+    if (this->checkIfTetrominoCollides(this->activeTetromino, this->activeTetrominoCoordinate))
+    {
+        this->activeTetromino->rotate(false);
     }
 
     // TODO: check if collision, undo rotation
@@ -73,9 +80,13 @@ void Grid::setActiveTetrominoCoordinate(Coordinate coordinate)
 {
     if (this->activeTetromino)
     {
-        this->activeTetrominoCoordinate = coordinate;
+        if (this->checkIfTetrominoCollides(this->activeTetromino, coordinate))
+        {
+            return;
+        }
 
-        this->activeTetromino->setPosition(this->convertCoordinatetoPosition(coordinate));
+        this->activeTetrominoCoordinate = coordinate;
+        this->activeTetromino->setPosition(this->convertCoordinateToPosition(coordinate));
     }
 }
 
@@ -100,7 +111,7 @@ Tetromino* Grid::getActiveTetromino()
 
 #pragma mark - Private methods
 
-Vec2 Grid::convertCoordinatetoPosition(Coordinate coordinate)
+Vec2 Grid::convertCoordinateToPosition(Coordinate coordinate)
 {
     Size contentSize = this->getContentSize();
 
@@ -108,4 +119,22 @@ Vec2 Grid::convertCoordinatetoPosition(Coordinate coordinate)
     float blockHeight = contentSize.height / float(GRID_HEIGHT);
 
     return Vec2(coordinate.x * blockWidth, coordinate.y * blockHeight);
+}
+
+bool Grid::checkIfTetrominoCollides(Tetromino *tetromino, Coordinate tetrominoCoordinate)
+{
+    int skirtStart = tetromino->getMinimunXCoordinate();
+    std::vector<int> skirt = tetromino->getSkirt();
+
+    for (int index = 0; index < skirt.size(); index++)
+    {
+        Coordinate localCoordinate = Coordinate(index + skirtStart, skirt[index]);
+        Coordinate gridCoordinate = Coordinate::add(tetrominoCoordinate, localCoordinate);
+
+        if (gridCoordinate.x < 0 || gridCoordinate.y < 0 || gridCoordinate.x >= GRID_WIDTH || gridCoordinate.y >= GRID_HEIGHT)
+        {
+            return true;
+        }
+    }
+    return false;
 }

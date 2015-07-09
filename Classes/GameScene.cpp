@@ -12,6 +12,8 @@
 #include "Grid.h"
 #include "Tetromino.h"
 
+#include <time.h>
+
 using namespace cocos2d;
 
 bool GameScene::init()
@@ -68,12 +70,14 @@ void GameScene::setupTouchHandling()
     static Vec2 firstTouchPos;
     static Vec2 lastTouchPos;
     static bool allowRotate;
+    static std::clock_t touchStartedTime;
 
     touchListener->onTouchBegan = [&](Touch* touch, Event* event)
     {
         firstTouchPos = this->convertTouchToNodeSpace(touch);
         lastTouchPos = firstTouchPos;
         allowRotate = true;
+        touchStartedTime = clock();//std::clock();
         return true;
     };
     touchListener->onTouchMoved = [&](Touch* touch, Event* event)
@@ -91,13 +95,22 @@ void GameScene::setupTouchHandling()
         Coordinate touchCoordinate = this->convertPositionToCoordinate(touchPos);
         Coordinate differenceCoordinate = this->convertPositionToCoordinate(difference);
         Coordinate activeTetrominoCoordinate = this->grid->getActiveTetrominoCoordinate();
-        if (abs(differenceCoordinate.x) >= 1)
+
+        if (differenceCoordinate.y <= -1)
+        {
+            Coordinate newTetrominoCoordinate = Coordinate(activeTetrominoCoordinate.x, activeTetrominoCoordinate.y - 1);
+            this->grid->setActiveTetrominoCoordinate(newTetrominoCoordinate);
+
+            lastTouchPos = touchPos;
+        }
+        else if (abs(differenceCoordinate.x) >= 1)
         {
             bool movingRight = differenceCoordinate.x > 0;
             Coordinate newTetrominoCoordinate;
             newTetrominoCoordinate = Coordinate(activeTetrominoCoordinate.x + (movingRight ? 1 : -1), activeTetrominoCoordinate.y);
             this->grid->setActiveTetrominoCoordinate(newTetrominoCoordinate);
             allowRotate = false;
+
             lastTouchPos = touchPos;
         }
     };
@@ -105,12 +118,24 @@ void GameScene::setupTouchHandling()
     {
         Vec2 touchEndPos = this->convertTouchToNodeSpace(touch);
 
-        float distance = touchEndPos.distance(firstTouchPos);
-        Size blocksize = this->grid->getBlockSize();
+        Vec2 difference = touchEndPos - firstTouchPos; // maybe use lastTouchPos
+        float touchDuration = (float)(clock() - touchStartedTime) / CLOCKS_PER_SEC;
+        float touchVelocity = fabsf(difference.y / touchDuration);
 
-        if (distance < blocksize.width && allowRotate)
+        log("%f", touchVelocity);
+        if (touchVelocity > DROP_VELOCITY)
         {
-            this->grid->rotateActiveTetromino();
+            log("DROP TETROMINO");
+        }
+        else
+        {
+            float distance = touchEndPos.distance(firstTouchPos);
+            Size blocksize = this->grid->getBlockSize();
+
+            if (distance < blocksize.width && allowRotate)
+            {
+                this->grid->rotateActiveTetromino();
+            }
         }
     };
 

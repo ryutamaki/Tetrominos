@@ -115,6 +115,8 @@ void Tetromino::rotate(bool right)
     }
 }
 
+#pragma mark - Accessor
+
 int Tetromino::getHighestYCoordinate()
 {
     std::vector<Coordinate> coordinates = this->rotations[this->rotationIndex];
@@ -125,6 +127,18 @@ int Tetromino::getHighestYCoordinate()
         maxY = MAX(coordinate.y, maxY);
     }
     return maxY;
+}
+
+int Tetromino::getMinimunXCoordinate()
+{
+    std::vector<Coordinate> coordinates = this->rotations[this->rotationIndex];
+
+    int minX = GRID_SIZE - 1;
+    for (Coordinate coordinate : coordinates)
+    {
+        minX = MIN(coordinate.x, minX);
+    }
+    return minX;
 }
 
 int Tetromino::getWidthInBlocks()
@@ -138,4 +152,19 @@ int Tetromino::getWidthInBlocks()
         maxX = MAX(coordinate.x, maxX);
     }
     return maxX - minX + 1;
+}
+
+std::vector<int> Tetromino::getSkirt()
+{
+    int minX = this->getMinimunXCoordinate();
+    std::vector<int> skirtVector = std::vector<int>(this->getWidthInBlocks(), GRID_SIZE - 1);
+
+    std::vector<Coordinate> coordinates = this->rotations[this->rotationIndex];
+
+    for (Coordinate coordinate : coordinates)
+    {
+        int skirtVectorIndex = coordinate.x - minX;
+        skirtVector[skirtVectorIndex] = MIN(skirtVector[skirtVectorIndex], coordinate.y);
+    }
+    return skirtVector;
 }
