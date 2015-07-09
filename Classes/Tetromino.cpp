@@ -46,7 +46,7 @@ bool Tetromino::initWithType(TetrominoType type)
     this->rotations = tetrominoStete.rotations;
     this->color = tetrominoStete.color;
     this->blocks = std::vector<Sprite*>();
-    this->blocks.reserve(4);
+    this->blocks.reserve(BLOCKS_PER_TETROMINO);
     this->rotationIndex = 0;
 
     Sprite* dummyBlock = Sprite::create("block.png");
@@ -119,7 +119,7 @@ void Tetromino::rotate(bool right)
 
 int Tetromino::getHighestYCoordinate()
 {
-    std::vector<Coordinate> coordinates = this->rotations[this->rotationIndex];
+    std::vector<Coordinate> coordinates = this->getCurrentRotation();
 
     int maxY = 0;
     for (Coordinate coordinate : coordinates)
@@ -131,7 +131,7 @@ int Tetromino::getHighestYCoordinate()
 
 int Tetromino::getMinimunXCoordinate()
 {
-    std::vector<Coordinate> coordinates = this->rotations[this->rotationIndex];
+    std::vector<Coordinate> coordinates = this->getCurrentRotation();
 
     int minX = GRID_SIZE - 1;
     for (Coordinate coordinate : coordinates)
@@ -143,7 +143,7 @@ int Tetromino::getMinimunXCoordinate()
 
 int Tetromino::getWidthInBlocks()
 {
-    std::vector<Coordinate> coordinates = this->rotations[this->rotationIndex];
+    std::vector<Coordinate> coordinates = this->getCurrentRotation();
     int minX = GRID_SIZE - 1;
     int maxX = 0;
     for (Coordinate coordinate : coordinates)
@@ -159,7 +159,7 @@ std::vector<int> Tetromino::getSkirt()
     int minX = this->getMinimunXCoordinate();
     std::vector<int> skirtVector = std::vector<int>(this->getWidthInBlocks(), GRID_SIZE - 1);
 
-    std::vector<Coordinate> coordinates = this->rotations[this->rotationIndex];
+    std::vector<Coordinate> coordinates = this->getCurrentRotation();
 
     for (Coordinate coordinate : coordinates)
     {
@@ -167,4 +167,14 @@ std::vector<int> Tetromino::getSkirt()
         skirtVector[skirtVectorIndex] = MIN(skirtVector[skirtVectorIndex], coordinate.y);
     }
     return skirtVector;
+}
+
+std::vector<Sprite*> Tetromino::getBlocks()
+{
+    return this->blocks;
+}
+
+std::vector<Coordinate> Tetromino::getCurrentRotation()
+{
+    return this->rotations[this->rotationIndex];
 }
