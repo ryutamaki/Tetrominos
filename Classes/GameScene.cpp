@@ -113,6 +113,10 @@ void GameScene::setupTouchHandling()
     };
     touchListener->onTouchEnded = [&](Touch* touch, Event* event)
     {
+        if (!this->grid->getActiveTetromino())
+        {
+            return;
+        }
         Vec2 touchEndPos = this->convertTouchToNodeSpace(touch);
 
         Vec2 difference = touchEndPos - firstTouchPos; // maybe use lastTouchPos
@@ -123,6 +127,7 @@ void GameScene::setupTouchHandling()
         if (touchVelocity > DROP_VELOCITY)
         {
             log("DROP TETROMINO");
+            this->grid->dropActiveTetromino();
         }
         else
         {

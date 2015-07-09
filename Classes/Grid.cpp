@@ -69,8 +69,6 @@ void Grid::rotateActiveTetromino()
     {
         this->activeTetromino->rotate(false);
     }
-
-    // TODO: check if collision, undo rotation
 }
 
 void Grid::step()
@@ -89,6 +87,14 @@ void Grid::step()
             this->setActiveTetrominoCoordinate(nextCoordinate);
         }
     }
+}
+
+void Grid::dropActiveTetromino()
+{
+    Coordinate landingCoordinate = this->getTetrominoLandingCoordinate();
+
+    this->setActiveTetrominoCoordinate(landingCoordinate);
+    this->deactivateTetromino(this->getActiveTetromino(), landingCoordinate);
 }
 
 #pragma mark - Accessor
@@ -196,4 +202,15 @@ void Grid::placeTetrominoOnboard(Tetromino *tetromino, Coordinate tetrominoCoord
         // add the block to blocksLanded
         this->blocksLanded[globalCoordinate.y][globalCoordinate.x] = block;
     }
+}
+
+Coordinate Grid::getTetrominoLandingCoordinate()
+{
+    Coordinate newTetrominoCoordinate = this->activeTetrominoCoordinate;
+    do {
+        newTetrominoCoordinate = newTetrominoCoordinate.add(newTetrominoCoordinate, Coordinate(0, -1));
+    } while (!this->checkIfTetrominoCollides(this->activeTetromino, newTetrominoCoordinate));
+
+    newTetrominoCoordinate = newTetrominoCoordinate.add(newTetrominoCoordinate, Coordinate(0, 1));
+    return newTetrominoCoordinate;
 }

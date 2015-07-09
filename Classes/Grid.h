@@ -26,6 +26,7 @@ public:
 
     cocos2d::Size getBlockSize();
     Tetromino* getActiveTetromino();
+    void dropActiveTetromino();
 
 private:
     Tetromino* activeTetromino;
@@ -39,6 +40,7 @@ private:
     bool checkIfTetrominoCollides(Tetromino* tetromino, Coordinate tetrominoCoordinate);
     void deactivateTetromino(Tetromino* tetromino, Coordinate tetrominoCoordinate);
     void placeTetrominoOnboard(Tetromino* tetromino, Coordinate tetrominoCoordinate);
+    Coordinate getTetrominoLandingCoordinate();
 };
 
 #endif /* defined(__Tetrominos__Grid__) */
