@@ -173,6 +173,8 @@ void Grid::deactivateTetromino(Tetromino *tetromino, Coordinate tetrominoCoordin
 
     this->activeTetromino->removeFromParent();
     this->activeTetromino = nullptr;
+
+    this->cleareLines();
 }
 
 void Grid::placeTetrominoOnboard(Tetromino *tetromino, Coordinate tetrominoCoordinate)
@@ -213,4 +215,57 @@ Coordinate Grid::getTetrominoLandingCoordinate()
 
     newTetrominoCoordinate = newTetrominoCoordinate.add(newTetrominoCoordinate, Coordinate(0, 1));
     return newTetrominoCoordinate;
+}
+
+void Grid::cleareLines()
+{
+    for (int y = 0; y < GRID_HEIGHT; y++)
+    {
+        // check if all the blocks in a row are filled
+        bool fullLine = true;
+        std::vector<Sprite*> row = this->blocksLanded[y];
+        for (Sprite* block : row)
+        {
+            if (!block)
+            {
+                fullLine = false;
+                break;
+            }
+        }
+
+        // do nothing if a row is not filled
+        if (!fullLine)
+        {
+            continue;
+        }
+
+        // remove the block sprites from grid and blocksLanded
+        for (Sprite* block : row)
+        {
+            block->removeFromParent();
+        }
+        
+        blocksLanded.erase(blocksLanded.begin() + y);
+        
+        // move blocks in all rows above down one y coordinate
+        std::vector<std::vector<Sprite*>> rowsToMoveDown(blocksLanded.begin() + y, blocksLanded.end());
+        
+        for (std::vector<Sprite*> rowAbove : rowsToMoveDown)
+        {
+            for (Sprite* block : rowAbove)
+            {
+                if (!block)
+                {
+                    continue;
+                }
+                block->setPositionY(block->getPosition().y - block->getContentSize().height);
+            }
+        }
+
+        std::vector<Sprite*> newRow(GRID_WIDTH, nullptr);
+        blocksLanded.push_back(newRow);
+
+        // you have not to check the empty last row which added at above
+        y--;
+    }
 }
