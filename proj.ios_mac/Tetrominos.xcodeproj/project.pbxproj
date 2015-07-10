@@ -26,6 +26,8 @@
 		03F84D151B5067EC00364BCD /* NetworkingWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 03F84D111B5067EC00364BCD /* NetworkingWrapper.mm */; };
 		03F84D161B5067EC00364BCD /* NetworkManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 03F84D131B5067EC00364BCD /* NetworkManager.mm */; };
 		03F84D1B1B50690A00364BCD /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03F84D1A1B50690A00364BCD /* MultipeerConnectivity.framework */; };
+		03F84D1F1B508AFC00364BCD /* PreviewGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03F84D1D1B508AFC00364BCD /* PreviewGrid.cpp */; };
+		03F84D201B508AFC00364BCD /* PreviewGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03F84D1D1B508AFC00364BCD /* PreviewGrid.cpp */; };
 		1AC6FB21180E996B004C840B /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAF9180E9839004C840B /* libcocos2d Mac.a */; };
 		1AC6FB30180E99EB004C840B /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FB07180E9839004C840B /* libcocos2d iOS.a */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -144,6 +146,8 @@
 		03F84D131B5067EC00364BCD /* NetworkManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NetworkManager.mm; sourceTree = "<group>"; };
 		03F84D141B5067EC00364BCD /* NetworkManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManagerDelegate.h; sourceTree = "<group>"; };
 		03F84D1A1B50690A00364BCD /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.4.sdk/System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = DEVELOPER_DIR; };
+		03F84D1D1B508AFC00364BCD /* PreviewGrid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PreviewGrid.cpp; sourceTree = "<group>"; };
+		03F84D1E1B508AFC00364BCD /* PreviewGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewGrid.h; sourceTree = "<group>"; };
 		1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
 		1ACB3243164770DE00914215 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../cocos2dx/platform/third_party/ios/libraries/libcurl.a; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -276,6 +280,8 @@
 		03F84D191B5068EE00364BCD /* Game Sprites */ = {
 			isa = PBXGroup;
 			children = (
+				03F84D1D1B508AFC00364BCD /* PreviewGrid.cpp */,
+				03F84D1E1B508AFC00364BCD /* PreviewGrid.h */,
 				03BC8A401B44A4A500C97735 /* Grid.cpp */,
 				03BC8A411B44A4A500C97735 /* Grid.h */,
 				03BC8A441B44A85700C97735 /* Tetromino.cpp */,
@@ -599,6 +605,7 @@
 				03BC8A2E1B449CE800C97735 /* SceneManager.cpp in Sources */,
 				03BC8A1A1B447DEC00C97735 /* Lobby.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
+				03F84D1F1B508AFC00364BCD /* PreviewGrid.cpp in Sources */,
 				03BC8A201B448FD700C97735 /* GameScene.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				03BC8A4A1B44AFDB00C97735 /* Coordinate.cpp in Sources */,
@@ -617,6 +624,7 @@
 				03BC8A4B1B44AFDB00C97735 /* Coordinate.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				03BC8A2F1B449CE800C97735 /* SceneManager.cpp in Sources */,
+				03F84D201B508AFC00364BCD /* PreviewGrid.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				03BC8A1B1B447DEC00C97735 /* Lobby.cpp in Sources */,
 				03BC8A431B44A4A500C97735 /* Grid.cpp in Sources */,
