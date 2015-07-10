@@ -17,6 +17,8 @@ class PreviewGrid : public cocos2d::Sprite
 public:
     CREATE_FUNC(PreviewGrid);
 
+    void setState(JSONPacker::GameState state);
+
 private:
     bool init() override;
     void onEnter() override;
