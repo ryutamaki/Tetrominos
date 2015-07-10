@@ -43,7 +43,6 @@ void Grid::spawnTetromino(Tetromino *tetromino)
 {
     this->activeTetromino = tetromino;
 
-    // TODO: Plase a tetromino in correct position in grid
     this->activeTetromino->setAnchorPoint(Vec2(0.0f, 0.0f));
 
     int highestY = this->activeTetromino->getHighestYCoordinate();
@@ -54,6 +53,15 @@ void Grid::spawnTetromino(Tetromino *tetromino)
     this->setActiveTetrominoCoordinate(spawnCoordinate);
 
     this->addChild(this->activeTetromino);
+
+    // add ghost tetromino
+    TetrominoType type = tetromino->getTetrominoType();
+    this->ghostTetromino = Tetromino::createWithType(type);
+    this->ghostTetromino->setCascadeOpacityEnabled(true);
+    this->ghostTetromino->setOpacity(32);
+    this->updateGhostTetrominoPosition();
+
+    this->addChild(this->ghostTetromino);
 }
 
 void Grid::rotateActiveTetromino()
@@ -68,6 +76,11 @@ void Grid::rotateActiveTetromino()
     if (this->checkIfTetrominoCollides(this->activeTetromino, this->activeTetrominoCoordinate))
     {
         this->activeTetromino->rotate(false);
+    }
+    else
+    {
+        this->ghostTetromino->rotate(true);
+        this->updateGhostTetrominoPosition();
     }
 }
 
@@ -110,6 +123,8 @@ void Grid::setActiveTetrominoCoordinate(Coordinate coordinate)
 
         this->activeTetrominoCoordinate = coordinate;
         this->activeTetromino->setPosition(this->convertCoordinateToPosition(coordinate));
+
+        this->updateGhostTetrominoPosition();
     }
 }
 
@@ -173,6 +188,9 @@ void Grid::deactivateTetromino(Tetromino *tetromino, Coordinate tetrominoCoordin
 
     this->activeTetromino->removeFromParent();
     this->activeTetromino = nullptr;
+
+    this->ghostTetromino->removeFromParent();
+    this->ghostTetromino = nullptr;
 
     this->cleareLines();
 }
@@ -267,5 +285,14 @@ void Grid::cleareLines()
 
         // you have not to check the empty last row which added at above
         y--;
+    }
+}
+
+void Grid::updateGhostTetrominoPosition()
+{
+    if (this->ghostTetromino)
+    {
+        Coordinate landingCoordinate = this->getTetrominoLandingCoordinate();
+        this->ghostTetromino->setPosition(this->convertCoordinateToPosition(landingCoordinate));
     }
 }

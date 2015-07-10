@@ -30,6 +30,7 @@ public:
 
 private:
     Tetromino* activeTetromino;
+    Tetromino* ghostTetromino;
     Coordinate activeTetrominoCoordinate;
     std::vector<std::vector<Sprite*>> blocksLanded;
 
@@ -42,6 +43,7 @@ private:
     void placeTetrominoOnboard(Tetromino* tetromino, Coordinate tetrominoCoordinate);
     Coordinate getTetrominoLandingCoordinate();
     void cleareLines();
+    void updateGhostTetrominoPosition();
 };
 
 #endif /* defined(__Tetrominos__Grid__) */

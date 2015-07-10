@@ -117,6 +117,11 @@ void Tetromino::rotate(bool right)
 
 #pragma mark - Accessor
 
+TetrominoType Tetromino::getTetrominoType()
+{
+    return this->type;
+}
+
 int Tetromino::getHighestYCoordinate()
 {
     std::vector<Coordinate> coordinates = this->getCurrentRotation();
