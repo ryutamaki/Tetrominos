@@ -258,6 +258,45 @@
 			path = networking;
 			sourceTree = "<group>";
 		};
+		03F84D181B5068A900364BCD /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */,
+				46880B8719C43A87006E1F66 /* HelloWorldScene.h */,
+				03BC8A2C1B449CE800C97735 /* SceneManager.cpp */,
+				03BC8A2D1B449CE800C97735 /* SceneManager.h */,
+				03BC8A181B447DEC00C97735 /* Lobby.cpp */,
+				03BC8A191B447DEC00C97735 /* Lobby.h */,
+				03BC8A1E1B448FD700C97735 /* GameScene.cpp */,
+				03BC8A1F1B448FD700C97735 /* GameScene.h */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		03F84D191B5068EE00364BCD /* Game Sprites */ = {
+			isa = PBXGroup;
+			children = (
+				03BC8A401B44A4A500C97735 /* Grid.cpp */,
+				03BC8A411B44A4A500C97735 /* Grid.h */,
+				03BC8A441B44A85700C97735 /* Tetromino.cpp */,
+				03BC8A451B44A85700C97735 /* Tetromino.h */,
+			);
+			name = "Game Sprites";
+			sourceTree = "<group>";
+		};
+		03F84D1C1B50694C00364BCD /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				0382A0891B45DCE40010A353 /* TetrominoBag.cpp */,
+				0382A08A1B45DCE40010A353 /* TetrominoBag.h */,
+				03BC8A481B44AFDB00C97735 /* Coordinate.cpp */,
+				03BC8A491B44AFDB00C97735 /* Coordinate.h */,
+				03BC8A501B44B43900C97735 /* JSONPacker.cpp */,
+				03BC8A511B44B43900C97735 /* JSONPacker.h */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
 		080E96DDFE201D6D7F000001 /* ios */ = {
 			isa = PBXGroup;
 			children = (
@@ -348,26 +387,11 @@
 			children = (
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
-				46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */,
-				46880B8719C43A87006E1F66 /* HelloWorldScene.h */,
-				03BC8A2C1B449CE800C97735 /* SceneManager.cpp */,
-				03BC8A2D1B449CE800C97735 /* SceneManager.h */,
-				03BC8A181B447DEC00C97735 /* Lobby.cpp */,
-				03BC8A191B447DEC00C97735 /* Lobby.h */,
-				03BC8A1E1B448FD700C97735 /* GameScene.cpp */,
-				03BC8A1F1B448FD700C97735 /* GameScene.h */,
-				03BC8A401B44A4A500C97735 /* Grid.cpp */,
-				03BC8A411B44A4A500C97735 /* Grid.h */,
-				03BC8A441B44A85700C97735 /* Tetromino.cpp */,
-				03BC8A451B44A85700C97735 /* Tetromino.h */,
-				0382A0891B45DCE40010A353 /* TetrominoBag.cpp */,
-				0382A08A1B45DCE40010A353 /* TetrominoBag.h */,
-				03BC8A481B44AFDB00C97735 /* Coordinate.cpp */,
-				03BC8A491B44AFDB00C97735 /* Coordinate.h */,
 				03BC8A1D1B44834800C97735 /* Constants.h */,
 				0343E6DD1B50363400A796DC /* UIConstants.h */,
-				03BC8A501B44B43900C97735 /* JSONPacker.cpp */,
-				03BC8A511B44B43900C97735 /* JSONPacker.h */,
+				03F84D181B5068A900364BCD /* Scenes */,
+				03F84D191B5068EE00364BCD /* Game Sprites */,
+				03F84D1C1B50694C00364BCD /* Utility */,
 				03F84D0F1B5067EC00364BCD /* networking */,
 			);
 			name = Classes;
