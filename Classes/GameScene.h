@@ -29,22 +29,26 @@ private:
     std::unique_ptr<TetrominoBag> tetrominoBag;
 
     bool active;
+    int totalScore;
+    cocos2d::ui::Text* scoreLabel;
 
+    // View lifecycle
     bool init() override;
     void onEnter() override;
-
     void setupTouchHandling();
 
+    // Game Logic
     Tetromino* createRandomTetromino();
-
-    void backButtonPressed(Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
-
     void setGameActive(bool active);
-
     void step(float dt);
+    void updateStateFromScore();
 
+    // Utility
     Coordinate convertPositionToCoordinate(cocos2d::Vec2 position);
 
+    // UI
+    void backButtonPressed(Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
+    void updateScoreLabel(int score);
 };
 
 #endif /* defined(__Tetrominos__GameScene__) */

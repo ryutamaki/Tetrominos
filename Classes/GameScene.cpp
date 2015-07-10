@@ -12,7 +12,10 @@
 #include "Grid.h"
 #include "Tetromino.h"
 
+#include "UIConstants.h"
+
 #include <time.h>
+#include "CocosGUI.h"
 
 using namespace cocos2d;
 
@@ -27,6 +30,7 @@ bool GameScene::init()
     this->addChild(background);
 
     this->tetrominoBag = std::unique_ptr<TetrominoBag>(new TetrominoBag());
+    this->totalScore = 0;
 
     this->active = false;
 
@@ -54,6 +58,13 @@ void GameScene::onEnter()
     backButton->loadTextures("backButton.png", "backButtonPressed.png");
     backButton->addTouchEventListener(CC_CALLBACK_2(GameScene::backButtonPressed, this));
     this->addChild(backButton);
+
+    // setup labels
+    this->scoreLabel = ui::Text::create("0", FONT_NAME, FONT_SIZE);
+    this->scoreLabel->setPosition(Vec2(visibleSize.width * 0.5f, visibleSize.height * 0.95f));
+    this->setAnchorPoint(Vec2(0.5f, 1.0f));
+    this->scoreLabel->setColor(LABEL_COLOR);
+    this->addChild(this->scoreLabel);
 
     this->setupTouchHandling();
 
@@ -126,8 +137,8 @@ void GameScene::setupTouchHandling()
         log("%f", touchVelocity);
         if (touchVelocity > DROP_VELOCITY)
         {
-            log("DROP TETROMINO");
             this->grid->dropActiveTetromino();
+            this->updateStateFromScore();
         }
         else
         {
@@ -185,12 +196,24 @@ void GameScene::step(float dt)
     {
         Tetromino* randomTest = this->createRandomTetromino();
         this->grid->spawnTetromino(randomTest);
+        return;
     }
 
     this->grid->step();
+    this->updateStateFromScore();
 }
 
-#pragma mark - Callbacks
+void GameScene::updateStateFromScore()
+{
+    int newScore = this->grid->getScore();
+    if (newScore > this->totalScore)
+    {
+        this->totalScore = newScore;
+        this->updateScoreLabel(newScore);
+    }
+}
+
+#pragma mark - UI
 
 void GameScene::backButtonPressed(cocos2d::Ref *pSender, ui::Widget::TouchEventType eEventType)
 {
@@ -198,4 +221,9 @@ void GameScene::backButtonPressed(cocos2d::Ref *pSender, ui::Widget::TouchEventT
     {
         SceneManager::getInstance()->exitGameScene();
     }
+}
+
+void GameScene::updateScoreLabel(int score)
+{
+    this->scoreLabel->setString(StringUtils::toString(score));
 }

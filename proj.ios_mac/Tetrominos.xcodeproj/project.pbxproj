@@ -117,6 +117,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0343E6DD1B50363400A796DC /* UIConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIConstants.h; sourceTree = "<group>"; };
 		0382A0891B45DCE40010A353 /* TetrominoBag.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TetrominoBag.cpp; sourceTree = "<group>"; };
 		0382A08A1B45DCE40010A353 /* TetrominoBag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TetrominoBag.h; sourceTree = "<group>"; };
 		03BC8A181B447DEC00C97735 /* Lobby.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Lobby.cpp; sourceTree = "<group>"; };
@@ -341,6 +342,7 @@
 				03BC8A481B44AFDB00C97735 /* Coordinate.cpp */,
 				03BC8A491B44AFDB00C97735 /* Coordinate.h */,
 				03BC8A1D1B44834800C97735 /* Constants.h */,
+				0343E6DD1B50363400A796DC /* UIConstants.h */,
 				03BC8A501B44B43900C97735 /* JSONPacker.cpp */,
 				03BC8A511B44B43900C97735 /* JSONPacker.h */,
 			);
