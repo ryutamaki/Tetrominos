@@ -114,6 +114,18 @@ void Grid::dropActiveTetromino()
     this->deactivateTetromino(this->getActiveTetromino(), landingCoordinate);
 }
 
+bool Grid::checkIfTopReached()
+{
+    for (Sprite* block : this->blocksLanded.back())
+    {
+        if (block)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 #pragma mark - Accessor
 
 void Grid::setActiveTetrominoCoordinate(Coordinate coordinate)

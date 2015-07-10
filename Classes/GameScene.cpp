@@ -32,6 +32,7 @@ bool GameScene::init()
     this->stepInterval = INITIAL_STEP_INTERVAL;
     this->tetrominoBag = std::unique_ptr<TetrominoBag>(new TetrominoBag());
     this->totalScore = 0;
+    this->timeLeft = TIME_PER_GAME;
 
     this->active = false;
 
@@ -63,9 +64,15 @@ void GameScene::onEnter()
     // setup labels
     this->scoreLabel = ui::Text::create("0", FONT_NAME, FONT_SIZE);
     this->scoreLabel->setPosition(Vec2(visibleSize.width * 0.5f, visibleSize.height * 0.95f));
-    this->setAnchorPoint(Vec2(0.5f, 1.0f));
+    this->scoreLabel->setAnchorPoint(Vec2(0.5f, 1.0f));
     this->scoreLabel->setColor(LABEL_COLOR);
     this->addChild(this->scoreLabel);
+
+    this->timeLeftLabel = ui::Text::create("0", FONT_NAME, FONT_SIZE);
+    this->timeLeftLabel->setPosition(this->scoreLabel->getPosition() - Vec2(0.0f, FONT_SIZE * 1.5f));
+    this->timeLeftLabel->setAnchorPoint(Vec2(0.5f, 1.0f));
+    this->timeLeftLabel->setColor(LABEL_COLOR);
+    this->addChild(this->timeLeftLabel);
 
     this->setupTouchHandling();
 
@@ -183,15 +190,22 @@ void GameScene::setGameActive(bool active)
     if (active)
     {
         this->schedule(CC_SCHEDULE_SELECTOR(GameScene::step), this->stepInterval);
+        this->scheduleUpdate();
     }
     else
     {
         this->unschedule(CC_SCHEDULE_SELECTOR(GameScene::step));
+        this->unscheduleUpdate();
     }
 }
 
 void GameScene::step(float dt)
 {
+    if (this->grid->checkIfTopReached())
+    {
+        this->gameOver();
+    }
+
     if (!this->grid->getActiveTetromino())
     {
         Tetromino* randomTest = this->createRandomTetromino();
@@ -201,6 +215,18 @@ void GameScene::step(float dt)
 
     this->grid->step();
     this->updateStateFromScore();
+}
+
+void GameScene::update(float dt)
+{
+    Node::update(dt);
+
+    this->setTimeLeft(this->timeLeft - dt);
+
+    if (this->timeLeft <= 0.0f)
+    {
+        this->gameOver();
+    }
 }
 
 void GameScene::updateStateFromScore()
@@ -223,6 +249,25 @@ void GameScene::updateGameSpeed(int score)
     this->stepInterval = newInterval;
     this->unschedule(CC_SCHEDULE_SELECTOR(GameScene::step));
     this->schedule(CC_SCHEDULE_SELECTOR(GameScene::step), this->stepInterval);
+}
+
+void GameScene::gameOver()
+{
+    this->setGameActive(false);
+
+    std::string scoreString = StringUtils::toString(totalScore);
+    std::string messageContent = "Your score is " + scoreString + "!";
+
+    MessageBox(messageContent.c_str(), "Game Over");
+
+    SceneManager::getInstance()->exitGameScene();
+}
+
+void GameScene::setTimeLeft(float time)
+{
+    this->timeLeft = time;
+    std::string timeLeftString = StringUtils::format("%2.1f", time);
+    this->timeLeftLabel->setString(StringUtils::toString(timeLeftString));
 }
 
 #pragma mark - UI
