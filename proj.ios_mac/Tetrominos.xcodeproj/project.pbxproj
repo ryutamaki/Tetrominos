@@ -23,6 +23,9 @@
 		03BC8A4B1B44AFDB00C97735 /* Coordinate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03BC8A481B44AFDB00C97735 /* Coordinate.cpp */; };
 		03BC8A521B44B43900C97735 /* JSONPacker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03BC8A501B44B43900C97735 /* JSONPacker.cpp */; };
 		03BC8A531B44B43900C97735 /* JSONPacker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03BC8A501B44B43900C97735 /* JSONPacker.cpp */; };
+		03F84D151B5067EC00364BCD /* NetworkingWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 03F84D111B5067EC00364BCD /* NetworkingWrapper.mm */; };
+		03F84D161B5067EC00364BCD /* NetworkManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 03F84D131B5067EC00364BCD /* NetworkManager.mm */; };
+		03F84D1B1B50690A00364BCD /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03F84D1A1B50690A00364BCD /* MultipeerConnectivity.framework */; };
 		1AC6FB21180E996B004C840B /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAF9180E9839004C840B /* libcocos2d Mac.a */; };
 		1AC6FB30180E99EB004C840B /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FB07180E9839004C840B /* libcocos2d iOS.a */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -135,6 +138,12 @@
 		03BC8A491B44AFDB00C97735 /* Coordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coordinate.h; sourceTree = "<group>"; };
 		03BC8A501B44B43900C97735 /* JSONPacker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSONPacker.cpp; sourceTree = "<group>"; };
 		03BC8A511B44B43900C97735 /* JSONPacker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONPacker.h; sourceTree = "<group>"; };
+		03F84D101B5067EC00364BCD /* NetworkingWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkingWrapper.h; sourceTree = "<group>"; };
+		03F84D111B5067EC00364BCD /* NetworkingWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NetworkingWrapper.mm; sourceTree = "<group>"; };
+		03F84D121B5067EC00364BCD /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
+		03F84D131B5067EC00364BCD /* NetworkManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NetworkManager.mm; sourceTree = "<group>"; };
+		03F84D141B5067EC00364BCD /* NetworkManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManagerDelegate.h; sourceTree = "<group>"; };
+		03F84D1A1B50690A00364BCD /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.4.sdk/System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = DEVELOPER_DIR; };
 		1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
 		1ACB3243164770DE00914215 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../cocos2dx/platform/third_party/ios/libraries/libcurl.a; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -200,6 +209,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03F84D1B1B50690A00364BCD /* MultipeerConnectivity.framework in Frameworks */,
 				52B47A471A53D09C004E4C60 /* Security.framework in Frameworks */,
 				1AC6FB30180E99EB004C840B /* libcocos2d iOS.a in Frameworks */,
 				D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */,
@@ -236,6 +246,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03F84D0F1B5067EC00364BCD /* networking */ = {
+			isa = PBXGroup;
+			children = (
+				03F84D101B5067EC00364BCD /* NetworkingWrapper.h */,
+				03F84D111B5067EC00364BCD /* NetworkingWrapper.mm */,
+				03F84D121B5067EC00364BCD /* NetworkManager.h */,
+				03F84D131B5067EC00364BCD /* NetworkManager.mm */,
+				03F84D141B5067EC00364BCD /* NetworkManagerDelegate.h */,
+			);
+			path = networking;
+			sourceTree = "<group>";
+		};
 		080E96DDFE201D6D7F000001 /* ios */ = {
 			isa = PBXGroup;
 			children = (
@@ -286,6 +308,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				03F84D1A1B50690A00364BCD /* MultipeerConnectivity.framework */,
 				8262943D1AAF051F00CB7CF7 /* Security.framework */,
 				52B47A461A53D09B004E4C60 /* Security.framework */,
 				D6B0611A1803AB670077942B /* CoreMotion.framework */,
@@ -345,6 +368,7 @@
 				0343E6DD1B50363400A796DC /* UIConstants.h */,
 				03BC8A501B44B43900C97735 /* JSONPacker.cpp */,
 				03BC8A511B44B43900C97735 /* JSONPacker.h */,
+				03F84D0F1B5067EC00364BCD /* networking */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -544,8 +568,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				03BC8A421B44A4A500C97735 /* Grid.cpp in Sources */,
+				03F84D151B5067EC00364BCD /* NetworkingWrapper.mm in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
+				03F84D161B5067EC00364BCD /* NetworkManager.mm in Sources */,
 				03BC8A2E1B449CE800C97735 /* SceneManager.cpp in Sources */,
 				03BC8A1A1B447DEC00C97735 /* Lobby.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
