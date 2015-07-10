@@ -27,10 +27,10 @@ public:
 private:
     Grid* grid;
     std::unique_ptr<TetrominoBag> tetrominoBag;
-
     bool active;
     int totalScore;
     cocos2d::ui::Text* scoreLabel;
+    float stepInterval;
 
     // View lifecycle
     bool init() override;
@@ -42,6 +42,7 @@ private:
     void setGameActive(bool active);
     void step(float dt);
     void updateStateFromScore();
+    void updateGameSpeed(int score);
 
     // Utility
     Coordinate convertPositionToCoordinate(cocos2d::Vec2 position);

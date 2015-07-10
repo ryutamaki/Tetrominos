@@ -29,6 +29,7 @@ bool GameScene::init()
     LayerColor* background = LayerColor::create(Color4B(255, 255, 255, 255));
     this->addChild(background);
 
+    this->stepInterval = INITIAL_STEP_INTERVAL;
     this->tetrominoBag = std::unique_ptr<TetrominoBag>(new TetrominoBag());
     this->totalScore = 0;
 
@@ -100,7 +101,6 @@ void GameScene::setupTouchHandling()
             return;
         }
 
-        Coordinate touchCoordinate = this->convertPositionToCoordinate(touchPos);
         Coordinate differenceCoordinate = this->convertPositionToCoordinate(difference);
         Coordinate activeTetrominoCoordinate = this->grid->getActiveTetrominoCoordinate();
 
@@ -182,7 +182,7 @@ void GameScene::setGameActive(bool active)
     this->active = active;
     if (active)
     {
-        this->schedule(CC_SCHEDULE_SELECTOR(GameScene::step), INITIAL_STEP_INTERVAL);
+        this->schedule(CC_SCHEDULE_SELECTOR(GameScene::step), this->stepInterval);
     }
     else
     {
@@ -210,7 +210,19 @@ void GameScene::updateStateFromScore()
     {
         this->totalScore = newScore;
         this->updateScoreLabel(newScore);
+        this->updateGameSpeed(this->totalScore);
     }
+}
+
+void GameScene::updateGameSpeed(int score)
+{
+    int stepAcceleration = score / SCORE_TO_ACCELERATE;
+    float intervalDeduction = powf(ACCELERATION_FACTOR, stepAcceleration);
+//    float intervalDeduction = INITIAL_STEP_INTERVAL * float(stepAcceleration) * ACCELERATION_FACTOR;
+    float newInterval = MAX((INITIAL_STEP_INTERVAL * intervalDeduction), SPEED_MAX);
+    this->stepInterval = newInterval;
+    this->unschedule(CC_SCHEDULE_SELECTOR(GameScene::step));
+    this->schedule(CC_SCHEDULE_SELECTOR(GameScene::step), this->stepInterval);
 }
 
 #pragma mark - UI
