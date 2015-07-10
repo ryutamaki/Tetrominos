@@ -8,9 +8,10 @@
 
 #include "GameScene.h"
 #include "SceneManager.h"
-
 #include "Grid.h"
 #include "Tetromino.h"
+#include "JSONPacker.h"
+#include "NetworkingWrapper.h"
 
 #include "UIConstants.h"
 
@@ -33,6 +34,8 @@ bool GameScene::init()
     this->tetrominoBag = std::unique_ptr<TetrominoBag>(new TetrominoBag());
     this->totalScore = 0;
     this->timeLeft = TIME_PER_GAME;
+    this->networkedSession = false;
+    this->isGameOver = false;
 
     this->active = false;
 
@@ -164,15 +167,15 @@ void GameScene::setupTouchHandling()
 
 #pragma mark - Public methods
 
-Coordinate GameScene::convertPositionToCoordinate(Vec2 position)
+void GameScene::setNetworkedSession(bool networkedSession)
 {
-    Size contentSize = this->getContentSize();
-    Size blockSize = this->grid->getBlockSize();
+    this->networkedSession = networkedSession;
+}
 
-    int coordinateX = position.x / blockSize.width;
-    int coordinateY = position.y / blockSize.height;
-
-    return Coordinate(coordinateX, coordinateY);
+void GameScene::receivedData(const void *data, unsigned long length)
+{
+    const char* cstr = reinterpret_cast<const char*>(data);
+    std::string json = std::string(cstr, length);
 }
 
 #pragma mark - Private methods
@@ -210,11 +213,17 @@ void GameScene::step(float dt)
     {
         Tetromino* randomTest = this->createRandomTetromino();
         this->grid->spawnTetromino(randomTest);
-        return;
+    }
+    else
+    {
+        this->grid->step();
+        this->updateStateFromScore();
     }
 
-    this->grid->step();
-    this->updateStateFromScore();
+    if (this->networkedSession)
+    {
+        this->sendGameStateOverNetwork();
+    }
 }
 
 void GameScene::update(float dt)
@@ -253,7 +262,13 @@ void GameScene::updateGameSpeed(int score)
 
 void GameScene::gameOver()
 {
+    this->isGameOver = true;
     this->setGameActive(false);
+
+    if (this->networkedSession)
+    {
+        this->sendGameStateOverNetwork();
+    }
 
     std::string scoreString = StringUtils::toString(totalScore);
     std::string messageContent = "Your score is " + scoreString + "!";
@@ -283,4 +298,64 @@ void GameScene::backButtonPressed(cocos2d::Ref *pSender, ui::Widget::TouchEventT
 void GameScene::updateScoreLabel(int score)
 {
     this->scoreLabel->setString(StringUtils::toString(score));
+}
+
+#pragma mark - Networking
+
+void GameScene::sendGameStateOverNetwork()
+{
+    JSONPacker::GameState state;
+
+    state.name = NetworkingWrapper::getDeviceName();
+    state.score = this->totalScore;
+    state.gameOver = this->isGameOver;
+
+    std::vector<std::vector<Sprite*>> blocksLanded = this->grid->getBlocksLanded();
+
+    for (int y = 0; y < blocksLanded.size(); y++)
+    {
+        std::vector<Color3B> blocks(blocksLanded.size(), Color3B::WHITE);
+        state.board.push_back(blocks);
+
+        std::vector<Sprite*> column = blocksLanded[y];
+
+        for (int x = 0; x < column.size(); x++)
+        {
+            Sprite* block = column[x];
+            if (block)
+            {
+                state.board[y][x] = block->getColor();
+            }
+        }
+    }
+
+    Tetromino* activeTetromino = this->grid->getActiveTetromino();
+    if (activeTetromino)
+    {
+        std::vector<Coordinate> coordinates = activeTetromino->getCurrentRotation();
+        Coordinate tetrominoCoordinate = this->grid->getActiveTetrominoCoordinate();
+        Color3B color = activeTetromino->getTetrominoColor();
+
+        for (Coordinate blockCoordinate : coordinates)
+        {
+            Coordinate gridCoordinate = Coordinate::add(tetrominoCoordinate, blockCoordinate);
+            state.board[gridCoordinate.y][gridCoordinate.x] = color;
+        }
+    }
+
+    std::string json = JSONPacker::packGameState(state);
+    SceneManager::getInstance()->sendData(json.c_str(), json.length());
+}
+
+#pragma mark - Utility
+
+Coordinate GameScene::convertPositionToCoordinate(Vec2 position)
+{
+    Size contentSize = this->getContentSize();
+    Size blockSize = this->grid->getBlockSize();
+
+    int coordinateX = position.x / blockSize.width;
+    int coordinateY = position.y / blockSize.height;
+
+    return Coordinate(coordinateX, coordinateY);
 }

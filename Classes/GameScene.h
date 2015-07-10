@@ -24,6 +24,9 @@ class GameScene : public cocos2d::Node {
 public:
     CREATE_FUNC(GameScene);
 
+    void setNetworkedSession(bool networkedSession);
+    void receivedData(const void* data, unsigned long length);
+
 private:
     Grid* grid;
     std::unique_ptr<TetrominoBag> tetrominoBag;
@@ -33,6 +36,8 @@ private:
     cocos2d::ui::Text* timeLeftLabel;
     float stepInterval;
     float timeLeft;
+    bool networkedSession;
+    bool isGameOver;
 
     // View lifecycle
     bool init() override;
@@ -48,6 +53,9 @@ private:
     void updateGameSpeed(int score);
     void gameOver();
     void setTimeLeft(float time);
+
+    // Networking
+    void sendGameStateOverNetwork();
 
     // Utility
     Coordinate convertPositionToCoordinate(cocos2d::Vec2 position);

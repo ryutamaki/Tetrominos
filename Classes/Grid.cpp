@@ -173,6 +173,11 @@ int Grid::getScore()
     return this->score;
 }
 
+std::vector<std::vector<Sprite*>> Grid::getBlocksLanded()
+{
+    return this->blocksLanded;
+}
+
 #pragma mark - Private methods
 
 Vec2 Grid::convertCoordinateToPosition(Coordinate coordinate)

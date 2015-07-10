@@ -183,3 +183,8 @@ std::vector<Coordinate> Tetromino::getCurrentRotation()
 {
     return this->rotations[this->rotationIndex];
 }
+
+Color3B Tetromino::getTetrominoColor()
+{
+    return this->color;
+}

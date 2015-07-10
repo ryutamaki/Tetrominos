@@ -35,7 +35,9 @@ public:
     void setDelegate(NetworkingDelegate* delegate);
     
     void startAdvertisingAvailability();
-    
+
+    void stopAdvertisingAvailability();
+
     void showPeerList();
     
     void sendData(const void* data, unsigned long length);
