@@ -12,6 +12,7 @@
 #include "Tetromino.h"
 #include "JSONPacker.h"
 #include "NetworkingWrapper.h"
+#include "PreviewGrid.h"
 
 #include "UIConstants.h"
 
@@ -76,6 +77,18 @@ void GameScene::onEnter()
     this->timeLeftLabel->setAnchorPoint(Vec2(0.5f, 1.0f));
     this->timeLeftLabel->setColor(LABEL_COLOR);
     this->addChild(this->timeLeftLabel);
+
+    if (this->networkedSession)
+    {
+        this->grid->setAnchorPoint(Vec2(0.0f, 0.0f));
+        this->grid->setPosition(Vec2(0.0f, 0.0f));
+
+        this->previewGrid = PreviewGrid::create();
+        this->previewGrid->setAnchorPoint(Vec2(1.0f, 1.0f));
+        this->previewGrid->setPosition(Vec2(visibleSize.width, visibleSize.height));
+        this->previewGrid->setScale(0.3f);
+        this->addChild(this->previewGrid);
+    }
 
     this->setupTouchHandling();
 
@@ -176,6 +189,15 @@ void GameScene::receivedData(const void *data, unsigned long length)
 {
     const char* cstr = reinterpret_cast<const char*>(data);
     std::string json = std::string(cstr, length);
+
+    JSONPacker::GameState state = JSONPacker::unpackGameStateJSON(json);
+    if (state.gameOver)
+    {
+        this->gameOver();
+        return;
+    }
+
+    this->previewGrid->setState(state);
 }
 
 #pragma mark - Private methods
@@ -339,7 +361,10 @@ void GameScene::sendGameStateOverNetwork()
         for (Coordinate blockCoordinate : coordinates)
         {
             Coordinate gridCoordinate = Coordinate::add(tetrominoCoordinate, blockCoordinate);
-            state.board[gridCoordinate.y][gridCoordinate.x] = color;
+            if (gridCoordinate.x < GRID_WIDTH && gridCoordinate.y < GRID_HEIGHT)
+            {
+                state.board[gridCoordinate.y][gridCoordinate.x] = color;
+            }
         }
     }
 
